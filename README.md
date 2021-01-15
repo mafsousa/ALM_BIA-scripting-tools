@@ -1,16 +1,15 @@
 ## BioImage Analysis tools
 Simple bioimage analysis macro/scripts developed at Advanced Light Microscopy Facility at I3S, Porto Portugal
 
-* LIFtoTIFF
-* FromInCellToHyperstack
-* Spheroids_intensity_measure
-* Woundhealing_TimeSegmentation
-* StarDist_process_folder
-* Radially_spatial_cell_measurements
+## ImageJ/Fiji
+* LIFtoTIFF: Convert the series of a LIF file into TIF format
+* FromInCellToHyperstack: convert InCell images in hyperstack arranged by wells and fields
+* Spheroids_intensity_measure: Process a folder of InCell images (arranged by wells and fields), to determine spheroid morphometric features and analyse mean inetnsity values of a specific channel inside the spheroid 
+* Woundhealing_TimeSegmentation: calculate wound healing area of a time-lapse image
+* StarDist_process_folder:  apply a pre trained StarDist 2D model to a folder of images
 
 # Authors
 Mafalda Sousa, BioImage Analyst, mafsousa@ibmc.up.pt
-Paula Sampaio, Head Microscopist, sampaio@ibmc.up.pt
 
 # Licence
 
