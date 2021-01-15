@@ -27,18 +27,31 @@ print(filename);
 //open file
 if(File.exists(filename) && (endsWith(filename, ext))){
 	open(filename);
+	getDimensions(width, height, channels, slices, frames);
+	//convert slices to frames
+	if(frames == 1 && slices > 1){
+		run("Stack to Hyperstack...", "order=xyczt(default) channels=1 slices=1 frames=" + slices + " display=Color");
+		frames = slices;
+	}
+	
 	width = getWidth();
 	height = getHeight();
 	if (width>1000) { //to heavy to process
 		run("Scale...", "x=0.5 y=0.5 z=1.0 width=" + round(width/2) + " height=" + round(height/2) + " depth="+ nSlices + " interpolation=Bilinear average process create");
+		//scaled dimensions
+		getDimensions(width, height, channels, slices, frames);
+		getPixelSize(unit, pixelWidth, pixelHeight);
+		Stack.getUnits(X, Y, Z, Time, Value);
 	}
-	setOption("ScaleConversions", true);
+	
+	//remove scale and convert to 8-bits	
 	resetMinAndMax();
 	run("8-bit");
 	run("Set Scale...", "distance=0 known=0 unit=pixel");
-	
+		
 	Satisfied = false;
 	while (Satisfied==false) {
+	// Input parameters
 		Dialog.create("Algorithm parameters");
 		Dialog.addMessage("Select algorithm parameters");
 		Dialog.addNumber("Gaussian sigma", 5);
@@ -66,12 +79,13 @@ if(File.exists(filename) && (endsWith(filename, ext))){
 		setAutoThreshold(thres + " dark");
 		getThreshold(lower, upper);
 		setThreshold(lower, upper*1.05);
+		run("Convert to Mask", "method=" + thres + " background=Dark");
 		
 		//Post-processing
 		run("Options...", "iterations=1 count=1 do=Open stack");
 		
 		//Find wound countours
-		run("Set Measurements...", "area display redirect=None decimal=2");
+		run("Set Measurements...", "area stack display redirect=None decimal=2");
 		MinArea = width * 0.10 * height; 
 		run("Analyze Particles...", "size=" + MinArea + "-Infinity show=Masks display clear include add stack");
 
@@ -85,15 +99,17 @@ if(File.exists(filename) && (endsWith(filename, ext))){
 			//Save Results
 			selectWindow("Results");
 			saveAs("Results",outDir + File.separator + img + ".xls");	
-			xValues = newArray(nResults);
-			yValues = newArray(nResults);
-			for (i = 0; i < nResults(); i++) {
-    			yValues[i] = getResult("Area", i);
-    			xValues[i] = getResult("Slice", i);
-			}	
-			Plot.create("Plot of Results", "Time frame", "Area [pixels]");
-			Plot.add("Circle", Table.getColumn("Area", "Results"));
-			Plot.setStyle(0, "blue,#a0a0ff,1.0,Circle");
+			if (frames > 1){
+				xValues = newArray(nResults);
+				yValues = newArray(nResults);
+				for (i = 0; i < nResults(); i++) {
+	    			yValues[i] = getResult("Area", i);
+	    			xValues[i] = getResult("Slice", i);
+				}	
+				Plot.create("Plot of Results", "Time frame", "Area [pixels]");
+				Plot.add("Circle", Table.getColumn("Area", "Results"));
+				Plot.setStyle(0, "blue,#a0a0ff,1.0,Circle");
+		   }
 			//Preview result	
 			selectWindow(imgP);
 			close();
