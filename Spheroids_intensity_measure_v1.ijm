@@ -107,6 +107,7 @@ run("Clear Results");
 setBatchMode(true);
 
 for (i = 0; i < files.length; i++) {
+	roiManager("reset");
 	filename = files[i];
 	
 	if(endsWith(filename, ".tif")){		
@@ -162,9 +163,10 @@ for (i = 0; i < files.length; i++) {
 		run("Analyze Particles...", "size=10000-Infinity show=Masks exclude include");
 		mask = getTitle();
 		selectWindow(mask);
-		run("Median...", "radius=20");
-		//run("Invert");		
-		run("Analyze Particles...", "size=10000-Infinity circularity=0.5-1 show=Masks exclude include");		
+		run("Median...", "radius=10");
+		run("Invert");		
+		run("Analyze Particles...", "size=20000-infinity circularity=0.8-1 show=Masks exclude include");	
+		run("Invert");	
 		run("Create Selection");		
 			
 		if(selectionType() !=-1){
@@ -196,8 +198,10 @@ for (i = 0; i < files.length; i++) {
 		run("Analyze Particles...", "size=10000-Infinity show=Masks exclude include");
 		mask = getTitle();
 		selectWindow(mask);
-		run("Median...", "radius=20");
-		//run("Invert");
+		run("Median...", "radius=10");
+		run("Invert");		
+		run("Analyze Particles...", "size=20000-infinity circularity=0.8-1 show=Masks exclude include");	
+		run("Invert");
 		run("Create Selection");
 		if(selectionType() !=-1){
 			roiManager("Add");
@@ -219,7 +223,8 @@ for (i = 0; i < files.length; i++) {
 		run("Enhance Contrast", "saturated=0.35");
 		if(roiManager("count")>0){ //if spheroid area exists
 			roiManager("select", 0);
-			//create dialog to ask for verification						
+			//create dialog to ask for verification		
+				
 			Dialog.create("Spheroid options");	
 			Dialog.addMessage("Verify if the spheroid area is correct.\nCheck Yes to continue. Check No to correct manually.");
 			Dialog.addRadioButtonGroup("The spheroid area is correct?", newArray("Yes","No"), 1, 2, "Yes");
@@ -227,7 +232,7 @@ for (i = 0; i < files.length; i++) {
 					
 			satisfied = Dialog.getRadioButton();
 			if(satisfied=="Yes"){ //If ok measure intensity values in Ch1							
-				selectWindow(mask);				
+				//selectWindow(mask);				
 				roiManager("select", 0);
 				//roiManager("measure");									
 			}
@@ -274,6 +279,8 @@ for (i = 0; i < files.length; i++) {
 			run("Enlarge...", "enlarge=5 pixel");
 			roiManager("update");					
 			//roiManager("Measure");
+			selectWindow("copy");
+			close();
 		}
 	}
 	else{//If skip validation step measure and save				
