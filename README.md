@@ -2,17 +2,17 @@
 Simple bioimage analysis macro/scripts developed at Advanced Light Microscopy Facility at I3S, Porto Portugal
 
 ## ImageJ/Fiji
-* LIFtoTIFF: Convert the series of a LIF file into TIF format
-* FromInCellToHyperstack: convert InCell images in hyperstack arranged by wells and fields
-* Woundhealing_TimeSegmentation: calculate wound healing area of a time-lapse image
-* StarDist_process_folder:  apply a pre trained StarDist 2D model to a folder of images
+* **LIFtoTIFF**: Convert the series of a LIF file into TIF format
+* **FromInCellToHyperstack**: convert InCell images in hyperstack arranged by wells and fields
+* **Woundhealing_TimeSegmentation**: calculate wound healing area of a time-lapse image
+* **StarDist_process_folder**:  apply a pre trained StarDist 2D model to a folder of images
 
 ## Python
 
 * **InCell_Merge_Excel_Files**: merge at least two excel files from InCell analysis results
-* From_subfolder_to_folder: join files from different subfolders to he same level folder
-* ChangeFilenames: change file names, by string replacement. Also allows removing file name spaces(e.g, test 1.txt to test1.txt)
-* MergeExcelFiles: Merge two excel (.csv) files (source and target) y specifying the columns number to copy from source to target file; 
+* **From_subfolder_to_folder**: join files from different subfolders to he same level folder
+* **ChangeFilenames**: change file names, by string replacement. Also allows removing file name spaces(e.g, test 1.txt to test1.txt)
+* **MergeExcelFiles**: Merge two excel (.csv) files (source and target) by specifying the columns number to copy from source to target file; 
  
 # Authors
 Mafalda Sousa, BioImage Analyst, mafsousa@ibmc.up.pt
