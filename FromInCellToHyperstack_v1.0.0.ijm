@@ -1,5 +1,5 @@
 /*Title: Read sequentialy files from Incell and save hyperstack
- * Version: V1.0
+ * Version: V1.1
 *
 * Short description: Input InCell isolated tiff files, searching for wells (lines, columns) and fields. 
 * Create hyperstack for each field, (xyzct) and save as tiff.
@@ -68,7 +68,7 @@ id2 = indexOf(file_name_start, "(");
 well_format = substring(file_name_start, id1 + 2, id2);
 print(well_format);
 if (startsWith(well_format,"0")) {
-	well_start_number = substring(well_format, well_format-1);
+	well_start_number = substring(well_format, 0, well_format-1);
 }
 else {
 	well_start_number = "";
