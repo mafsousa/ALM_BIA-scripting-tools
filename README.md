@@ -15,7 +15,8 @@ Simple bioimage analysis macro/scripts developed at Advanced Light Microscopy Fa
 * **MergeExcelFiles**: Merge two excel (.csv) files (source and target) by specifying the columns number to copy from source to target file;
 * **AppendExcelFiles**: Merge excel files with the same columns and save in a new excel file;  
  
-![picture alt](https://github.com/mafsousa/ALM_BIA-scripting-tools/blob/main/Data_samples/AppendExcelfilesGUI.png) 
+     ![picture alt](https://github.com/mafsousa/ALM_BIA-scripting-tools/blob/main/Data_samples/AppendExcelfilesGUI_small.png) 
+
 # Authors
 Mafalda Sousa, BioImage Analyst, mafsousa@ibmc.up.pt
 
