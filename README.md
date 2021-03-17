@@ -12,7 +12,8 @@ Simple bioimage analysis macro/scripts developed at Advanced Light Microscopy Fa
 * **InCell_Merge_Excel_Files**: merge at least two excel files from InCell analysis results
 * **From_subfolder_to_folder**: join files from different subfolders to he same level folder
 * **ChangeFilenames**: change file names, by string replacement. Also allows removing file name spaces(e.g, test 1.txt to test1.txt)
-* **MergeExcelFiles**: Merge two excel (.csv) files (source and target) by specifying the columns number to copy from source to target file; 
+* **MergeExcelFiles**: Merge two excel (.csv) files (source and target) by specifying the columns number to copy from source to target file;
+* **AppendExcelFiles**: Merge excel files with the same columns and save in a new excel file;  
  
 # Authors
 Mafalda Sousa, BioImage Analyst, mafsousa@ibmc.up.pt
