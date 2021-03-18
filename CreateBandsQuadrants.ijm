@@ -44,8 +44,8 @@ roiManager("rename", "central roi");
 
 // define the number of rings and bandwidth
 Dialog.create("Schwann cells migration")
-Dialog.addNumber("Number of bands", 10);
-Dialog.addNumber("Band width [px]",10);
+Dialog.addNumber("Number of bands", 5);
+Dialog.addNumber("Band width [px]",15);
 Dialog.show();
 rings = Dialog.getNumber();
 band_width = Dialog.getNumber();
@@ -67,7 +67,7 @@ if((rings * band_width)>X/2 || (rings * band_width)>Y/2){
 
 
 //Add the rings to Roi manager
-setBatchMode("hide");
+//setBatchMode("hide");
 r = newArray(rings);
 t = 0;
 for (i = 0; i < rings; i=i+1) {
@@ -90,8 +90,10 @@ for (i = 0; i < rings; i=i+1) {
 
 number_rois = roiManager("count");
 roiManager("select", 0);
-raio = getValue("Height")/2;
-diameter = rings *  raio;
+raio = getValue("Major");
+diameter = round(rings *  band_width + raio);
+
+//print(diameter);
 
 roiManager("select", 0);
 xm = getValue("X");
