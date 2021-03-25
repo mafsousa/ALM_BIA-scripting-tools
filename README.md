@@ -10,7 +10,7 @@ Simple bioimage analysis macro/scripts developed at Advanced Light Microscopy Fa
 
    ![picture alt](https://github.com/mafsousa/ALM_BIA-scripting-tools/blob/main/Data_samples/CreateBandsQuadrants.png) 
 
-* **SetParasiteLabel**: creates an annotated image with the parasite track information obtained from ToAst tracking plugin (https://imagej.net/ToAST)
+* **SetParasiteLabel**: creates an annotated image with the parasite track information obtained from GetParasitePosition.py script
 
 ## Python
 
