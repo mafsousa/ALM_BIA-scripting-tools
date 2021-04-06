@@ -1,5 +1,5 @@
 /*Title: Read sequentialy files from Incell and save hyperstack
- * Version: V1.3.3
+ * Version: V1.4
 *
 * Short description: Input InCell isolated tiff files, searching for wells (lines, columns) and fields. 
 * Create hyperstack for each field, (xyzct) and save as tiff.
@@ -43,10 +43,6 @@ slices = Dialog.getNumber();
 frames = Dialog.getNumber();
 order = Dialog.getChoice();
 
-print(order);
-//source_input = "F - 001(fld 01 wv TL-Brightfield - DAPI).tif";
-//file_pattern = newArray("wv TL-Brightfield - DAPI","wv Cy3 - Cy3","wv DAPI - DAPI","wv FITC - FITC","wv TexasRed - TexasRed");
-
 if(channels < 1 || field_number < 1 || slices < 1 || frames < 1){
 	exit("Input variables must be higher than 0 ");
 }
@@ -57,8 +53,6 @@ if(isNaN(channels) || isNaN(field_number) || isNaN(slices)|| isNaN(frames)){
 //Verify possible file names
 path = File.getParent(source_input);
 file = File.getNameWithoutExtension(source_input);
-
-print(file);
 
 if(indexOf(file,"wv")!=-1){
 	file_pattern = substring(file, indexOf(file,"wv")-1, indexOf(file, ")"));	
@@ -106,7 +100,6 @@ for (line=0; line<well_line.length; line++){
 		
 		column = checkNumber(well_start_number,parseInt(well_col[col]));
 		
-	
 		file_start_name = well_line[line] + " - " + column;	
 		for (f = 1; f <= field_number; f++){
 			if (field_number == 1) {
@@ -125,14 +118,8 @@ for (line=0; line<well_line.length; line++){
 			
 	    	if(File.exists(filename)){	
 	    		print(file_start_name + field_name );
-	    		//print(filename);
-	    		//if((slices>1 || frames >1) && channels < 2){
-	    			run("Image Sequence...", "open=[" + filename + "] number=" + channels*frames*slices + " file=[" + file_start_name + field_name +"] sort");
-	    		//}
-	    		//else{	    		
-				//	run("Image Sequence...", "open=[" + filename + "] number=" + channels + " file=[" + file_start_name + field_name +"] sort");
-	    		//}
-	    		//convert to hyperstack
+	    		run("Image Sequence...", "open=[" + filename + "] number=" + channels*frames*slices + " file=[" + file_start_name + field_name +"] sort");
+	    		
 	    		if (channels > 1 || frames > 1 || slices > 1) {
 	    			
 					run("Stack to Hyperstack...", "order=" + order + " channels="+ channels +" slices=" + slices + " frames=" + frames + " display=Color");
@@ -170,7 +157,7 @@ function checkNumber(suffix, index){
 function checkfld(field,f) {	
 	idx1 = indexOf(field, "d");
 	idx2 = lengthOf(field);
-	//print(idx2-idx1);
+	
 	if(f<10){
 		if((idx2-idx1) == 3 )
 			aux = " ";
