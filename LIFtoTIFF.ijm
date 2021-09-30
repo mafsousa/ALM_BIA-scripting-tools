@@ -45,7 +45,7 @@ for (f=0; f< filelist.length; f++) {
 	     print("Opening " + series_name);
 	
 	     // open file, requires  Bio-Formats
-	     run("Bio-Formats Importer", "open="+ inDir + File.separator + filename +  " color_mode=Default rois_import=[ROI manager] view=Hyperstack stack_order=XYCZT use_virtual_stack " + series_name);
+	     run("Bio-Formats Importer", "open=["+ inDir + File.separator + filename +  "] color_mode=Default rois_import=[ROI manager] view=Hyperstack stack_order=XYCZT use_virtual_stack " + series_name);
 	     idx = indexOf(getTitle(), ".lif");
 	     image_name = substring(getTitle(), 0,idx) + "_" + series_name;
 	     
